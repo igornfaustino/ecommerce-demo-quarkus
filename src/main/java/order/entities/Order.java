@@ -1,10 +1,10 @@
-package order;
+package order.entities;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import item.Item;
+import item.entities.Item;
 import order.exceptions.DuplicatedItem;
 import order.exceptions.InvalidQuantity;
 

@@ -1,4 +1,4 @@
-package order;
+package order.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -10,7 +10,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
-import item.Item;
+import item.entities.Item;
 import order.exceptions.DuplicatedItem;
 import order.exceptions.InvalidQuantity;
 

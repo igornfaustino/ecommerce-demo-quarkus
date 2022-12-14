@@ -1,4 +1,4 @@
-package order;
+package order.entities;
 
 import java.util.UUID;
 
