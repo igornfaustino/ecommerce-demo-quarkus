@@ -52,4 +52,16 @@ public class OrderTest {
         List<OrderItem> orderItem = order.getItems();
         assertEquals(2, orderItem.size());
     }
+
+    @Test
+    void shouldCalculateTotal() throws Exception {
+        Order order = new Order("99999999999", new Date());
+        Item guitar = new Item(UUID.randomUUID(), "Guitarra", 500.00f);
+        Item amp = new Item(UUID.randomUUID(), "Amplificador", 300.00f);
+
+        order.addItem(guitar, 1);
+        order.addItem(amp, 1);
+
+        assertEquals(800.00f, order.getTotal());
+    }
 }

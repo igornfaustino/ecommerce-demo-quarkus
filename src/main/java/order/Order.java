@@ -52,4 +52,12 @@ public class Order {
             return orderItem.idItem.equals(item.getId());
         }).findFirst().isPresent();
     }
+
+    public float getTotal() {
+        float total = 0;
+        for (OrderItem item : items) {
+            total += item.getTotal();
+        }
+        return total;
+    }
 }
