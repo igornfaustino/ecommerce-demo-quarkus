@@ -3,19 +3,26 @@ package order.entities;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import item.entities.Item;
 import order.exceptions.DuplicatedItem;
 import order.exceptions.InvalidQuantity;
 
 public class Order {
+    UUID id;
     String cpf;
     Date issuDate;
     List<OrderItem> items = new ArrayList<>();
 
     public Order(String cpf, Date issuDate) {
+        this.id = UUID.randomUUID();
         this.cpf = cpf;
         this.issuDate = issuDate;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public String getCpf() {
