@@ -22,7 +22,7 @@ public class PlaceOrderUseCase {
 
     public PlaceOrderOutput execute(PlaceOrderInput input) throws Exception {
         Order order = new Order(input.cpf, new Date());
-        for (Map.Entry<UUID, Integer> itemQuantity : input.ItemQuantity.entrySet()) {
+        for (Map.Entry<UUID, Integer> itemQuantity : input.itemQuantity.entrySet()) {
             Optional<Item> item = itemRepository.getItemById(itemQuantity.getKey()).await()
                     .atMost(Duration.ofMillis(500));
             if (item.isEmpty())
