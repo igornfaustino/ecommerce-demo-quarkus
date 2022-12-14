@@ -2,7 +2,9 @@ package order.usecases.placeOrder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.Duration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -12,14 +14,18 @@ import org.junit.jupiter.api.Test;
 import infra.repositories.FakeItemRepository;
 import infra.repositories.FakeOrderRepository;
 import io.quarkus.test.junit.QuarkusTest;
+import order.entities.Order;
+import order.repositories.OrderRepository;
 
 @QuarkusTest
 public class PlaceOrderUseCaseTest {
     PlaceOrderUseCase useCase;
+    OrderRepository orderRepository;
 
     @BeforeEach
     void setup() {
-        useCase = new PlaceOrderUseCase(new FakeItemRepository(), new FakeOrderRepository());
+        orderRepository = new FakeOrderRepository();
+        useCase = new PlaceOrderUseCase(new FakeItemRepository(), orderRepository);
     }
 
     @Test
@@ -32,5 +38,7 @@ public class PlaceOrderUseCaseTest {
         PlaceOrderOutput output = useCase.execute(input);
 
         assertEquals(1300.00f, output.total);
+        List<Order> orders = orderRepository.listAll().await().atMost(Duration.ofMillis(500));
+        assertEquals(1, orders.size());
     }
 }

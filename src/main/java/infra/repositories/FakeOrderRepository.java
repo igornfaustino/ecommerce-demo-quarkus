@@ -16,4 +16,9 @@ public class FakeOrderRepository implements OrderRepository {
         return Uni.createFrom().item(order);
     }
 
+    @Override
+    public Uni<List<Order>> listAll() {
+        return Uni.createFrom().item(orders);
+    }
+
 }
