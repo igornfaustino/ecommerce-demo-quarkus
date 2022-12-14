@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import item.Item;
+import order.exceptions.DuplicatedItem;
 import order.exceptions.InvalidQuantity;
 
 public class Order {
@@ -37,9 +38,18 @@ public class Order {
         return this.items;
     }
 
-    public void addItem(Item item, int quantity) throws Exception {
+    public void addItem(Item item, int quantity) throws InvalidQuantity, DuplicatedItem {
         if (quantity <= 0)
             throw new InvalidQuantity();
+        if (isItemAlreadyOnOrder(item))
+            throw new DuplicatedItem();
+        OrderItem orderItem = new OrderItem(item.getId(), quantity, item.getPrice());
+        items.add(orderItem);
+    }
 
+    Boolean isItemAlreadyOnOrder(Item item) {
+        return items.stream().filter((orderItem) -> {
+            return orderItem.idItem.equals(item.getId());
+        }).findFirst().isPresent();
     }
 }
